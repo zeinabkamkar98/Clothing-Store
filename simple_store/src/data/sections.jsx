@@ -2,7 +2,7 @@ const sections = [
     {
         title: 'hats',
         imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-        id: 1,
+        id: 0,
         linkUrl: 'hats',
         size: 1,
     },
