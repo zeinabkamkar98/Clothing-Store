@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import collections from '../data/collections';
+import CollectionPreview from '../components/CollectionPreview';
+import { Container } from '@mui/material';
 
 export class Shop extends Component {
     constructor(props) {
@@ -10,7 +12,14 @@ export class Shop extends Component {
     }
     render() {
         return (
-            <div>Shop</div>
+            <>
+                <Container>
+                    {this.state.collections.map((item) => (
+                        <CollectionPreview key={item.id} collection={item.items} title={item.title}></CollectionPreview>
+                    ))}
+
+                </Container>
+            </>
         )
     }
 }

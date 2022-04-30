@@ -6,9 +6,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import sections from '../data/sections';
 
 export class Menu extends Component {
-    constructor(props) {
-        super(props);
-    }
+
     render() {
         return (
             <Box >
@@ -20,11 +18,7 @@ export class Menu extends Component {
                                 alt={item.title}
                                 loading="lazy"
                             />
-                            <ImageListItemBar sx={{
-                                background:
-                                    'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-                                    'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-                            }} position="top" title={item.title} subtitle="sub" />
+                            <ImageListItemBar position="top" title={item.title} />
                         </ImageListItem>
                     ))}
                 </ImageList>
