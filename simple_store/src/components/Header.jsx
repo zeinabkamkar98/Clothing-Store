@@ -117,7 +117,7 @@ export default function Header() {
             sx={{
                 width: 1,
                 top: 0,
-                marginBottom: 5,
+                marginBottom: 1,
                 zIndex: 100,
             }}>
             <AppBar position='static' >

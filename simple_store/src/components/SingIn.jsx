@@ -4,6 +4,25 @@ import TextField from '@mui/material/TextField';
 import { FormControl } from '@mui/material';
 
 export class SingIn extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            email: '',
+            password: '',
+        }
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.setState({ email: '', password: '' });
+        console.log(this.state)
+    }
+
+    handleChange = event => {
+        const { value, name } = event.target;
+
+        this.setState({ [name]: value });
+    }
     render() {
         return (
             <>
@@ -15,20 +34,30 @@ export class SingIn extends Component {
                 </Typography>
                 <FormControl fullWidth sx={{ mt: 1 }} variant="standard">
                     <TextField
-                        label="Email"
+                        name='email'
+                        type='email'
+                        onChange={this.handleChange}
+                        value={this.state.email}
+                        label='email'
+                        required
                         variant="standard"
                     />
+
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 1 }} variant="standard">
                     <TextField
-                        label="Password"
+                        name='password'
+                        type='password'
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                        label='password'
+                        required
                         variant="standard"
                     />
                 </FormControl>
 
                 <Stack spacing={2} direction="row" sx={{ pt: 5 }}>
-                    <Button variant="contained">SING IN</Button>
-                    <Button variant="outlined">SING IN WITH GOOGLE</Button>
+                    <Button variant="contained" onClick={this.handleSubmit}>SING IN</Button>
                 </Stack>
 
             </>

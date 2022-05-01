@@ -4,6 +4,27 @@ import TextField from '@mui/material/TextField';
 import { FormControl } from '@mui/material';
 
 export class SignUp extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            email: '',
+            password: '',
+            name: '',
+            confrimPassword: '',
+        }
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        this.setState({ email: '', password: '' });
+        console.log(this.state)
+    }
+
+    handleChange = event => {
+        const { value, name } = event.target;
+
+        this.setState({ [name]: value });
+    }
     render() {
         return (
             <>
@@ -15,30 +36,50 @@ export class SignUp extends Component {
                 </Typography>
                 <FormControl fullWidth sx={{ mt: 1 }} variant="standard">
                     <TextField
-                        label="Display Name"
+                        name='name'
+                        type='text'
+                        onChange={this.handleChange}
+                        value={this.state.name}
+                        label='Name'
+                        required
                         variant="standard"
                     />
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 1 }} variant="standard">
                     <TextField
-                        label="Email"
+                        name='email'
+                        type='email'
+                        onChange={this.handleChange}
+                        value={this.state.email}
+                        label='email'
+                        required
                         variant="standard"
                     />
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 1 }} variant="standard">
                     <TextField
-                        label="Password"
+                        name='password'
+                        type='password'
+                        onChange={this.handleChange}
+                        value={this.state.password}
+                        label='password'
+                        required
                         variant="standard"
                     />
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 1 }} variant="standard">
                     <TextField
-                        label="Confrim Password"
+                        name='confrimPassword'
+                        type='password'
+                        onChange={this.handleChange}
+                        value={this.state.confrimPassword}
+                        label='confrim password'
+                        required
                         variant="standard"
                     />
                 </FormControl>
                 <Box sx={{ pt: 5 }}>
-                    <Button variant="contained">SING UP</Button>
+                    <Button variant="contained" onClick={this.handleSubmit}>SING UP</Button>
                 </Box>
 
             </>
