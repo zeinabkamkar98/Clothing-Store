@@ -2,6 +2,8 @@ import { Typography, Button, Box } from '@mui/material';
 import React, { Component } from 'react';
 import TextField from '@mui/material/TextField';
 import { FormControl } from '@mui/material';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../redux/user/user.action';
 
 export class SignUp extends Component {
     constructor(props) {
@@ -16,8 +18,13 @@ export class SignUp extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({ email: '', password: '' });
-        console.log(this.state)
+        this.setState({
+            email: '',
+            password: '',
+            name: '',
+            confrimPassword: '',
+        });
+        this.props.setCurrentUser(this.state);
     }
 
     handleChange = event => {
@@ -86,5 +93,8 @@ export class SignUp extends Component {
         )
     }
 }
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+})
 
-export default SignUp;
+export default connect(null, mapDispatchToProps)(SignUp);

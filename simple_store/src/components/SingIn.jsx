@@ -2,6 +2,8 @@ import { Typography, Box, Button, Stack } from '@mui/material';
 import React, { Component } from 'react';
 import TextField from '@mui/material/TextField';
 import { FormControl } from '@mui/material';
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../redux/user/user.action';
 
 export class SingIn extends Component {
     constructor(props) {
@@ -14,8 +16,8 @@ export class SingIn extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        this.props.setCurrentUser(this.state);
         this.setState({ email: '', password: '' });
-        console.log(this.state)
     }
 
     handleChange = event => {
@@ -65,4 +67,8 @@ export class SingIn extends Component {
     }
 }
 
-export default SingIn;
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(SingIn);
