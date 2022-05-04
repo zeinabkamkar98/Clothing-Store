@@ -10,12 +10,28 @@ import { Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/user/user.action';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ShoppingMenuItem from './ShoppingMenuItem';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 
 const Header = (props) => {
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     const signOut = event => {
         event.preventDefault();
         props.setCurrentUser(null);
     }
+
 
     return (
         <Box position='sticky'
@@ -47,12 +63,52 @@ const Header = (props) => {
                             }
                         </Box>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                            <IconButton
+                                size="large"
+                                aria-label="show 4 new mails"
+                                color="inherit"
+                                id="basic-button"
+                                aria-controls={open ? 'basic-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={open ? 'true' : undefined}
+                                onClick={handleClick}
+                            >
                                 <Badge badgeContent={4} color="error">
                                     <ShoppingBagIcon />
                                 </Badge>
                             </IconButton>
                         </Box>
+
+                        <Menu
+                            id="basic-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                                'aria-labelledby': 'basic-button',
+                            }}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right',
+                            }}
+                            transformOrigin={{
+                                vertical: 'buttom',
+                                horizontal: 'right',
+                            }}
+
+                        >
+                            <Paper style={{ maxHeight: 500, overflow: 'auto' }}>
+                                <MenuItem onClick={handleClose}><ShoppingMenuItem></ShoppingMenuItem></MenuItem>
+
+                                <MenuItem onClick={handleClose}><ShoppingMenuItem></ShoppingMenuItem></MenuItem>
+                                <MenuItem onClick={handleClose}><ShoppingMenuItem></ShoppingMenuItem></MenuItem>
+                            </Paper>
+                            <MenuItem ><Button variant="contained" fullWidth={true}>GO TO CHECKOUT</Button></MenuItem>
+
+
+                        </Menu>
+
+
 
                     </Toolbar>
                 </Container>
