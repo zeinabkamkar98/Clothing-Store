@@ -42,7 +42,7 @@ const Header = (props) => {
                             <Link to="/shop" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SHOP</Link >
                             <Link to="/contact" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>CONTACT</Link >
                             {props.currentUser
-                                ? <Link to="/sign-in" onClick={signOut} style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN OUT</Link >
+                                ? <Link to='/' onClick={signOut} style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN OUT</Link >
                                 : <Link to="/sign-in" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN IN</Link >
                             }
                         </Box>
