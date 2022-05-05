@@ -5,8 +5,10 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { connect } from 'react-redux';
+import { addItem } from '../redux/cart/cart.action';
 
-export default function CollectionPreview(props) {
+const CollectionPreview = (props) => {
     return (
         <>
             <Typography sx={{ fontSize: 25, fontWeight: 'light', fontStyle: 'oblique' }}>
@@ -20,7 +22,7 @@ export default function CollectionPreview(props) {
                             src={item.imageUrl}
                             srcSet={item.imageUrl}
                             alt={item.name}
-                            loading="lazy"
+                            loading="l azy"
                         />
                         <ImageListItemBar
                             title={item.name}
@@ -29,6 +31,7 @@ export default function CollectionPreview(props) {
                                 <IconButton
                                     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                                     aria-label={`info about ${item.title}`}
+                                    onClick={() => props.addItem(item)}
                                 >
                                     <AddShoppingCartIcon color="white" />
                                 </IconButton>
@@ -41,3 +44,9 @@ export default function CollectionPreview(props) {
         </>
     );
 }
+
+const mapDispatchToProps = dispatch => ({
+    addItem: item => dispatch(addItem(item))
+})
+
+export default connect(null, mapDispatchToProps)(CollectionPreview);

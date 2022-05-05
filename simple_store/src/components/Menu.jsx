@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import sections from '../data/sections';
 import { styled } from '@mui/material/styles';

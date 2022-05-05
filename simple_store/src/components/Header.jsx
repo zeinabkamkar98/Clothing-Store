@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ShoppingMenuItem from './ShoppingMenuItem';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import { selectCartItemsCount, selectCartItems } from '../redux/cart/cart.selectors'
 
 const Header = (props) => {
 
@@ -73,7 +74,7 @@ const Header = (props) => {
                                 aria-expanded={open ? 'true' : undefined}
                                 onClick={handleClick}
                             >
-                                <Badge badgeContent={4} color="error">
+                                <Badge badgeContent={props.itemCount} color='secondary'>
                                     <ShoppingBagIcon />
                                 </Badge>
                             </IconButton>
@@ -92,16 +93,17 @@ const Header = (props) => {
                                 horizontal: 'right',
                             }}
                             transformOrigin={{
-                                vertical: 'buttom',
+                                vertical: 'bottom',
                                 horizontal: 'right',
                             }}
 
                         >
                             <Paper style={{ maxHeight: 500, overflow: 'auto' }}>
-                                <MenuItem onClick={handleClose}><ShoppingMenuItem></ShoppingMenuItem></MenuItem>
-
-                                <MenuItem onClick={handleClose}><ShoppingMenuItem></ShoppingMenuItem></MenuItem>
-                                <MenuItem onClick={handleClose}><ShoppingMenuItem></ShoppingMenuItem></MenuItem>
+                                {
+                                    props.cartItems.map((item) => (
+                                        <MenuItem key={item.id} onClick={handleClose}><ShoppingMenuItem item={item}></ShoppingMenuItem></MenuItem>
+                                    ))
+                                }
                             </Paper>
                             <MenuItem ><Button variant="contained" fullWidth={true}>GO TO CHECKOUT</Button></MenuItem>
 
@@ -118,7 +120,10 @@ const Header = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    cartItems: selectCartItems(state),
+    itemCount: selectCartItemsCount(state)
+
 })
 
 const mapDispatchToProps = dispatch => ({
