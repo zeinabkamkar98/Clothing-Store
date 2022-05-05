@@ -1,3 +1,5 @@
 export const CartActionType = {
   ADD_ITEM: "ADD_ITEM",
+  DELETE_ITEM: "DELETE_ITEM",
+  COMPLETE_DELETE_ITEM: "COMPLETE_DELETE_ITEM",
 };

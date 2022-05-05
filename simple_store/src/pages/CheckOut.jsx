@@ -11,9 +11,9 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ClearIcon from '@mui/icons-material/Clear';
 import { selectCartItemsCount, selectCartItems, selectCartTotal } from '../redux/cart/cart.selectors'
-import { selectCurrentUser } from '../redux/user/user.selector'
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import { addItem, deleteItem, completeDeleteItem } from '../redux/cart/cart.action';
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -39,6 +39,9 @@ const CheckOut = (props) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    const handleCellClick = (e) => {
+        console.log(e.target.textContent);
+    }
     return (
         <Container >
             <Paper sx={{ width: '100%', overflow: 'hidden', mt: 5 }}>
@@ -63,14 +66,14 @@ const CheckOut = (props) => {
                                     <TableCell align="left" component="th" scope="row">
                                         <img width={100} height={130} src={item.imageUrl}></img>
                                     </TableCell>
-                                    <TableCell align="left">{item.name}</TableCell>
+                                    <TableCell onClick={handleCellClick} align="left">{item.name}</TableCell>
                                     <TableCell align="left">
-                                        <ArrowBackIosIcon sx={{ fontSize: 16 }} />
+                                        <ArrowBackIosIcon sx={{ fontSize: 16 }} onClick={() => props.deleteItem(item)} />
                                         <span style={{ fontSize: 18, margin: 5 }}>{item.quantity}</span>
-                                        <ArrowForwardIosIcon sx={{ fontSize: 16 }} />
+                                        <ArrowForwardIosIcon sx={{ fontSize: 16 }} onClick={() => props.addItem(item)} />
                                     </TableCell>
                                     <TableCell align="left">$ {item.price}</TableCell>
-                                    <TableCell align="left"><ClearIcon></ClearIcon></TableCell>
+                                    <TableCell align="left"><ClearIcon onClick={() => props.completeDeleteItem(item)}></ClearIcon></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -98,6 +101,9 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    addItem: item => dispatch(addItem(item)),
+    deleteItem: item => dispatch(deleteItem(item)),
+    completeDeleteItem: item => dispatch(completeDeleteItem(item)),
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(CheckOut);
