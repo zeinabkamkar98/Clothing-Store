@@ -4,8 +4,11 @@ import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
 import SingIn from "./pages/SignIn";
+import CheckOut from "./pages/CheckOut";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+import { selectCurrentUser } from "./redux/user/user.selector";
+import { createStructuredSelector } from "reselect";
 
 function App(props) {
   return (
@@ -15,6 +18,7 @@ function App(props) {
         <Route path="/" element={<Home />}></Route>
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/check-out" element={<CheckOut />}></Route>
         <Route
           path="/sign-in"
           element={props.currentUser ? <Navigate to="/" /> : <SingIn />}
@@ -24,8 +28,8 @@ function App(props) {
   );
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps)(App);

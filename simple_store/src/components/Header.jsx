@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/user/user.action';
 import Menu from '@mui/material/Menu';
@@ -16,9 +16,11 @@ import ShoppingMenuItem from './ShoppingMenuItem';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { selectCartItemsCount, selectCartItems } from '../redux/cart/cart.selectors'
+import { selectCurrentUser } from '../redux/user/user.selector'
+import { createStructuredSelector } from 'reselect';
 
 const Header = (props) => {
-
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -105,7 +107,7 @@ const Header = (props) => {
                                     ))
                                 }
                             </Paper>
-                            <MenuItem ><Button variant="contained" fullWidth={true}>GO TO CHECKOUT</Button></MenuItem>
+                            <MenuItem ><Button onClick={() => navigate("/check-out")} variant="contained" fullWidth={true}>GO TO CHECKOUT</Button></MenuItem>
 
 
                         </Menu>
@@ -119,10 +121,10 @@ const Header = (props) => {
     );
 }
 
-const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser,
-    cartItems: selectCartItems(state),
-    itemCount: selectCartItemsCount(state)
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    cartItems: selectCartItems,
+    itemCount: selectCartItemsCount
 
 })
 
