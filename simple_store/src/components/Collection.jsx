@@ -1,16 +1,19 @@
-import React from 'react'
-import IconButton from '@mui/material/IconButton';
+import React from 'react';
+
+import {
+    IconButton,
+    ImageListItem,
+    ImageListItemBar,
+    ImageList
+} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ImageList from '@mui/material/ImageList';
+
 import { connect } from 'react-redux';
 import { addItem } from '../redux/cart/cart.action';
 
 const Collection = (props) => {
     return (
         <>
-
             <ImageList cols={4} gap={20}>
                 {props.data.map((item) => (
                     <ImageListItem key={item.id}>
@@ -18,7 +21,7 @@ const Collection = (props) => {
                             src={item.imageUrl}
                             srcSet={item.imageUrl}
                             alt={item.name}
-                            loading="l azy"
+                            loading="lazy"
                         />
                         <ImageListItemBar
                             title={item.name}
@@ -33,10 +36,10 @@ const Collection = (props) => {
                                 </IconButton>
                             }
                         />
-
                     </ImageListItem>
                 ))}
-            </ImageList></>
+            </ImageList>
+        </>
     )
 
 }

@@ -1,9 +1,7 @@
 import * as React from 'react';
 
-import Typography from '@mui/material/Typography';
+import { Typography, Divider } from '@mui/material';
 
-import { connect } from 'react-redux';
-import { addItem } from '../redux/cart/cart.action';
 import Collection from './Collection';
 
 const CollectionPreview = (props) => {
@@ -12,7 +10,7 @@ const CollectionPreview = (props) => {
             <Typography sx={{ fontSize: 25, fontWeight: 'light', fontStyle: 'oblique' }}>
                 {props.title}
             </Typography>
-            <hr></hr>
+            <Divider></Divider>
             <Collection data={props.collection.slice(0, 4)}></Collection>
 
         </>

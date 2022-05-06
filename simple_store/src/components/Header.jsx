@@ -1,40 +1,22 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import { Container } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+
+import { AppBar, Box, Toolbar, Typography, Container } from '@mui/material';
+
+import ShoppingList from './ShoppingList';
+
+import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/user/user.action';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ShoppingMenuItem from './ShoppingMenuItem';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import { selectCartItemsCount, selectCartItems } from '../redux/cart/cart.selectors'
 import { selectCurrentUser } from '../redux/user/user.selector'
 import { createStructuredSelector } from 'reselect';
 
 const Header = (props) => {
-    const navigate = useNavigate();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     const signOut = event => {
         event.preventDefault();
         props.setCurrentUser(null);
     }
-
 
     return (
         <Box position='sticky'
@@ -65,55 +47,7 @@ const Header = (props) => {
                                 : <Link to="/sign-in" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN IN</Link >
                             }
                         </Box>
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="show 4 new mails"
-                                color="inherit"
-                                id="basic-button"
-                                aria-controls={open ? 'basic-menu' : undefined}
-                                aria-haspopup="true"
-                                aria-expanded={open ? 'true' : undefined}
-                                onClick={handleClick}
-                            >
-                                <Badge badgeContent={props.itemCount} color='secondary'>
-                                    <ShoppingBagIcon />
-                                </Badge>
-                            </IconButton>
-                        </Box>
-
-                        <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            }}
-                            transformOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            }}
-
-                        >
-                            <Paper style={{ maxHeight: 500, overflow: 'auto' }}>
-                                {
-                                    props.cartItems.map((item) => (
-                                        <MenuItem key={item.id} onClick={handleClose}><ShoppingMenuItem item={item}></ShoppingMenuItem></MenuItem>
-                                    ))
-                                }
-                            </Paper>
-                            <MenuItem ><Button onClick={() => navigate("/check-out")} variant="contained" fullWidth={true}>GO TO CHECKOUT</Button></MenuItem>
-
-
-                        </Menu>
-
-
-
+                        <ShoppingList></ShoppingList>
                     </Toolbar>
                 </Container>
             </AppBar>
@@ -123,9 +57,6 @@ const Header = (props) => {
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    cartItems: selectCartItems,
-    itemCount: selectCartItemsCount
-
 })
 
 const mapDispatchToProps = dispatch => ({

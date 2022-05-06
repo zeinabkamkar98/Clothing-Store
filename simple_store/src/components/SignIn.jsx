@@ -1,11 +1,17 @@
-import { Typography, Button, Stack } from '@mui/material';
 import React, { Component } from 'react';
-import TextField from '@mui/material/TextField';
-import { FormControl } from '@mui/material';
+
+import {
+    Typography,
+    Button,
+    Stack,
+    TextField,
+    FormControl
+} from '@mui/material';
+
 import { connect } from 'react-redux';
 import { setCurrentUser } from '../redux/user/user.action';
 
-export class SingIn extends Component {
+export class SignIn extends Component {
     constructor(props) {
         super();
         this.state = {
@@ -22,9 +28,9 @@ export class SingIn extends Component {
 
     handleChange = event => {
         const { value, name } = event.target;
-
         this.setState({ [name]: value });
     }
+
     render() {
         return (
             <>
@@ -44,7 +50,6 @@ export class SingIn extends Component {
                         required
                         variant="standard"
                     />
-
                 </FormControl>
                 <FormControl fullWidth sx={{ mt: 1 }} variant="standard">
                     <TextField
@@ -71,4 +76,4 @@ const mapDispatchToProps = dispatch => ({
     setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 
-export default connect(null, mapDispatchToProps)(SingIn);
+export default connect(null, mapDispatchToProps)(SignIn);

@@ -1,11 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-
-export default function ShoppingMenuItem(props) {
-
+const ShoppingListItem = (props) => {
     return (
         <>
             <CardMedia
@@ -26,3 +24,5 @@ export default function ShoppingMenuItem(props) {
         </>
     );
 }
+
+export default ShoppingListItem;
