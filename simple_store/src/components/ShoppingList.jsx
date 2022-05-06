@@ -66,11 +66,11 @@ const ShoppingList = (props) => {
                     'aria-labelledby': 'basic-button',
                 }}
                 anchorOrigin={{
-                    vertical: 'buttom',
+                    vertical: 'bottom',
                     horizontal: 'left',
                 }}
                 transformOrigin={{
-                    vertical: 'buttom',
+                    vertical: 'bottom',
                     horizontal: 'right',
                 }}
 

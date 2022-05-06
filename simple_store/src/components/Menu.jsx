@@ -1,12 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import sections from '../data/sections';
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import { connect } from 'react-redux';
 import { selectDirectorySections } from './../redux/directory/directory.selector'
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
@@ -77,12 +77,16 @@ const Menu = (props) => {
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
             {props.sections.map((image) => (
+
                 <ImageButton
                     focusRipple
                     key={image.id}
                     style={{
                         width: image.size,
                     }}
+                    component={Link}
+                    to='shop-detail'
+                    state={{ id: image.id }}
                 >
                     <ImageSrc style={{ backgroundImage: `url(${image.imageUrl})` }} />
                     <ImageBackdrop className="MuiImageBackdrop-root" />
@@ -103,8 +107,10 @@ const Menu = (props) => {
                         </Typography>
                     </Image>
                 </ImageButton>
-            ))}
-        </Box>
+
+            ))
+            }
+        </Box >
     );
 }
 
