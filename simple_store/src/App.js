@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import { createStructuredSelector } from "reselect";
+import ShopDetail from "./pages/ShopDetail";
 
 function App(props) {
   return (
@@ -19,6 +20,7 @@ function App(props) {
         <Route path="/shop" element={<Shop />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/check-out" element={<CheckOut />}></Route>
+        <Route path="/shop-detail" element={<ShopDetail />}></Route>
         <Route
           path="/sign-in"
           element={props.currentUser ? <Navigate to="/" /> : <SingIn />}
