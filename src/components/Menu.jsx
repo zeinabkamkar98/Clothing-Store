@@ -86,8 +86,8 @@ const Menu = (props) => {
                         width: image.size,
                     }}
                     component={Link}
-                    to='shop-detail'
-                    state={{ id: image.id }}
+                    to={`shop-detail/${image.id}`}
+
                 >
                     <ImageSrc style={{ backgroundImage: `url(${image.imageUrl})` }} />
                     <ImageBackdrop className="MuiImageBackdrop-root" />

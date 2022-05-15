@@ -23,7 +23,10 @@ function App() {
         <Route path="/shop" element={<ShopPage />}></Route>
         <Route path="/contact" element={<ContactPage />}></Route>
         <Route path="/check-out" element={<CheckOutPage />}></Route>
-        <Route path="/shop-detail" element={<ShopDetailPage />}></Route>
+        <Route
+          path="/shop-detail/:collectionId"
+          element={<ShopDetailPage />}
+        ></Route>
         <Route
           path="/sign-in"
           element={currentUser ? <Navigate to="/" /> : <SignInPage />}
