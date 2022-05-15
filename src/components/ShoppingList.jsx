@@ -16,11 +16,12 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
 import { useNavigate } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectCartItemsCount, selectCartItems } from '../redux/cart/cart.selector'
-import { createStructuredSelector } from 'reselect';
 
 const ShoppingList = (props) => {
+    const cartItems = useSelector(selectCartItems);
+    const itemCount = useSelector(selectCartItemsCount);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ const ShoppingList = (props) => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    <Badge badgeContent={props.itemCount} color='secondary'>
+                    <Badge badgeContent={itemCount} color='secondary'>
                         <ShoppingBagIcon />
                     </Badge>
                 </IconButton>
@@ -77,7 +78,7 @@ const ShoppingList = (props) => {
             >
                 <Paper style={{ maxHeight: 500, overflow: 'auto' }}>
                     {
-                        props.cartItems.map((item) => (
+                        cartItems.map((item) => (
                             <MenuItem key={item.id} ><ShoppingListItem item={item}></ShoppingListItem></MenuItem>
                         ))
                     }
@@ -87,9 +88,4 @@ const ShoppingList = (props) => {
         </>
     )
 }
-const mapStateToProps = createStructuredSelector({
-    cartItems: selectCartItems,
-    itemCount: selectCartItemsCount
-})
-
-export default connect(mapStateToProps)(ShoppingList);
+export default ShoppingList;

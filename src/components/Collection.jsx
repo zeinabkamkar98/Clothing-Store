@@ -8,10 +8,12 @@ import {
 } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addItem } from '../redux/cart/cart.action';
 
 const Collection = (props) => {
+    const dispatch = useDispatch();
+    const addItemHandler = item => dispatch(addItem(item));
     return (
         <>
             <ImageList cols={4} gap={20}>
@@ -30,7 +32,7 @@ const Collection = (props) => {
                                 <IconButton
                                     sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
                                     aria-label={`info about ${item.title}`}
-                                    onClick={() => props.addItem(item)}
+                                    onClick={() => addItemHandler(item)}
                                 >
                                     <AddShoppingCartIcon color="white" />
                                 </IconButton>
@@ -43,8 +45,5 @@ const Collection = (props) => {
     )
 
 }
-const mapDispatchToProps = dispatch => ({
-    addItem: item => dispatch(addItem(item))
-})
 
-export default connect(null, mapDispatchToProps)(Collection);
+export default Collection;

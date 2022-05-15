@@ -15,11 +15,13 @@ import {
     TablePagination
 } from '@mui/material';
 
-import { selectCartItems, selectCartTotal } from '../redux/cart/cart.selector'
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
+import { useSelector } from "react-redux";
+import { selectCartItems, selectCartTotal } from '../redux/cart/cart.selector';
 
 const CheckOutPage = (props) => {
+    const cartItems = useSelector(selectCartItems);
+    const total = useSelector(selectCartTotal);
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -47,7 +49,7 @@ const CheckOutPage = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {props.cartItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
+                            {cartItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((item) => (
                                 <CheckOutItem key={item.id} item={item}></CheckOutItem>
                             ))}
                         </TableBody>
@@ -56,21 +58,16 @@ const CheckOutPage = (props) => {
                 <TablePagination
                     rowsPerPageOptions={[3, 5, 10]}
                     component="div"
-                    count={props.cartItems.length}
+                    count={cartItems.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
             </Paper>
-            <Typography variant='h6' align='right' margin={3}>Total: ${props.total}</Typography>
+            <Typography variant='h6' align='right' margin={3}>Total: ${total}</Typography>
         </Container>
     );
 }
 
-const mapStateToProps = createStructuredSelector({
-    cartItems: selectCartItems,
-    total: selectCartTotal,
-})
-
-export default connect(mapStateToProps)(CheckOutPage);
+export default CheckOutPage;

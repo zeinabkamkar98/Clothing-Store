@@ -3,9 +3,8 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectDirectorySections } from './../redux/directory/directory.selector'
-import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
@@ -74,9 +73,11 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 const Menu = (props) => {
+    const sections = useSelector(selectDirectorySections);
+
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
-            {props.sections.map((image) => (
+            {sections.map((image) => (
 
                 <ImageButton
                     focusRipple
@@ -114,9 +115,4 @@ const Menu = (props) => {
     );
 }
 
-const mapStateToProps = createStructuredSelector({
-    sections: selectDirectorySections,
-})
-
-
-export default connect(mapStateToProps)(Menu);
+export default Menu;

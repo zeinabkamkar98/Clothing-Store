@@ -6,16 +6,18 @@ import ShoppingList from './ShoppingList';
 
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser } from '../redux/user/user.action';
 import { selectCurrentUser } from '../redux/user/user.selector'
-import { createStructuredSelector } from 'reselect';
 
 const Header = (props) => {
+    const dispatch = useDispatch();
+    const setCurrentUserHandler = user => dispatch(setCurrentUser(user));
+    const currentUser = useSelector(selectCurrentUser);
 
     const signOut = event => {
         event.preventDefault();
-        props.setCurrentUser(null);
+        setCurrentUserHandler(null);
     }
 
     return (
@@ -42,7 +44,7 @@ const Header = (props) => {
                             <Link to="/" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>HOME</Link >
                             <Link to="/shop" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SHOP</Link >
                             <Link to="/contact" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>CONTACT</Link >
-                            {props.currentUser
+                            {currentUser
                                 ? <Link to='/' onClick={signOut} style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN OUT</Link >
                                 : <Link to="/sign-in" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN IN</Link >
                             }
@@ -55,12 +57,4 @@ const Header = (props) => {
     );
 }
 
-const mapStateToProps = createStructuredSelector({
-    currentUser: selectCurrentUser,
-})
-
-const mapDispatchToProps = dispatch => ({
-    setCurrentUser: user => dispatch(setCurrentUser(user)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

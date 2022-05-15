@@ -10,11 +10,11 @@ import ShopDetailPage from "./pages/ShopDetailPage";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user.selector";
-import { createStructuredSelector } from "reselect";
 
-function App(props) {
+function App() {
+  const currentUser = useSelector(selectCurrentUser);
   return (
     <>
       <Header></Header>
@@ -26,15 +26,11 @@ function App(props) {
         <Route path="/shop-detail" element={<ShopDetailPage />}></Route>
         <Route
           path="/sign-in"
-          element={props.currentUser ? <Navigate to="/" /> : <SignInPage />}
+          element={currentUser ? <Navigate to="/" /> : <SignInPage />}
         ></Route>
       </Routes>
     </>
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;
