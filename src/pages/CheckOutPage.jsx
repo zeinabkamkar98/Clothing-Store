@@ -70,4 +70,4 @@ const CheckOutPage = (props) => {
     );
 }
 
-export default CheckOutPage;
+export default React.memo(CheckOutPage);

@@ -19,4 +19,4 @@ const ShopPage = () => {
     )
 }
 
-export default ShopPage;
+export default React.memo(ShopPage);

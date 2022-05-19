@@ -46,4 +46,4 @@ const Collection = (props) => {
 
 }
 
-export default Collection;
+export default React.memo(Collection);

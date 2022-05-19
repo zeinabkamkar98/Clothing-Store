@@ -70,4 +70,4 @@ const SignIn = (props) => {
 }
 
 
-export default SignIn;
+export default React.memo(SignIn);

@@ -21,4 +21,4 @@ const ShopDetailPage = (props) => {
     )
 }
 
-export default ShopDetailPage;
+export default React.memo(ShopDetailPage);

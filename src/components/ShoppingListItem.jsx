@@ -25,4 +25,4 @@ const ShoppingListItem = (props) => {
     );
 }
 
-export default ShoppingListItem;
+export default React.memo(ShoppingListItem);

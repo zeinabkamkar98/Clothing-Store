@@ -17,4 +17,4 @@ const CollectionPreview = (props) => {
     );
 }
 
-export default CollectionPreview;
+export default React.memo(CollectionPreview);

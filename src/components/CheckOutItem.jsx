@@ -36,4 +36,4 @@ const CheckOutItem = (props) => {
     )
 }
 
-export default CheckOutItem;
+export default React.memo(CheckOutItem);

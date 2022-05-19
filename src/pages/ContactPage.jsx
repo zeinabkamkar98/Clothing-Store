@@ -8,4 +8,4 @@ export class ContactPage extends Component {
     }
 }
 
-export default ContactPage;
+export default React.memo(ContactPage);
