@@ -1,6 +1,7 @@
 import React from "react";
 
 import Header from "./components/Header";
+import ErrorBoundray from "./components/ErrorBoundray";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -20,22 +21,24 @@ function App() {
   return (
     <>
       <Header></Header>
-      <React.Suspense fallback={<CircularProgress />}>
-        <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/shop" element={<ShopPage />}></Route>
-          <Route path="/contact" element={<ContactPage />}></Route>
-          <Route path="/check-out" element={<CheckOutPage />}></Route>
-          <Route
-            path="/shop-detail/:collectionId"
-            element={<ShopDetailPage />}
-          ></Route>
-          <Route
-            path="/sign-in"
-            element={currentUser ? <Navigate to="/" /> : <SignInPage />}
-          ></Route>
-        </Routes>
-      </React.Suspense>
+      <ErrorBoundray>
+        <React.Suspense fallback={<CircularProgress />}>
+          <Routes>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/shop" element={<ShopPage />}></Route>
+            <Route path="/contact" element={<ContactPage />}></Route>
+            <Route path="/check-out" element={<CheckOutPage />}></Route>
+            <Route
+              path="/shop-detail/:collectionId"
+              element={<ShopDetailPage />}
+            ></Route>
+            <Route
+              path="/sign-in"
+              element={currentUser ? <Navigate to="/" /> : <SignInPage />}
+            ></Route>
+          </Routes>
+        </React.Suspense>
+      </ErrorBoundray>
     </>
   );
 }
