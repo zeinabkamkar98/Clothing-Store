@@ -16,15 +16,16 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
         height: 100,
     },
     '&:hover, &.Mui-focusVisible': {
-        zIndex: 1,
+        zIndex: 0,
         '& .MuiImageBackdrop-root': {
-            opacity: 0.15,
+            opacity: 0.75,
         },
         '& .MuiImageMarked-root': {
             opacity: 0,
         },
         '& .MuiTypography-root': {
             border: '4px solid currentColor',
+            borderRadius: 5,
         },
     },
 }));
@@ -37,6 +38,7 @@ const ImageSrc = styled('span')({
     bottom: 0,
     backgroundSize: 'cover',
     backgroundPosition: 'center 40%',
+    borderRadius: 5,
 });
 
 const Image = styled('span')(({ theme }) => ({
@@ -57,8 +59,9 @@ const ImageBackdrop = styled('span')(({ theme }) => ({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0.4,
+    backgroundColor: theme.palette.secondary.main,
+    borderRadius: 5,
+    opacity: 0.1,
     transition: theme.transitions.create('opacity'),
 }));
 

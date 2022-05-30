@@ -2,7 +2,7 @@ const sections = [
 
     {
         title: 'hats',
-        imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+        imageUrl: 'https://i.ibb.co/bLB646Z/red-beanie.png',
         id: 1,
         linkUrl: 'hats',
         size: '48%',
