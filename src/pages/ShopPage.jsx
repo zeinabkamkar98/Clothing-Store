@@ -9,7 +9,7 @@ import collections from '../data/collections';
 const ShopPage = () => {
     return (
         <>
-            <Container>
+            <Container disableGutters >
                 {collections.map((item) => (
                     <CollectionPreview key={item.id} collection={item.items} title={item.title}></CollectionPreview>
                 ))}

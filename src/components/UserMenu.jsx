@@ -3,29 +3,30 @@ import React from 'react';
 import {
     Menu,
     MenuItem,
-    Button,
-    Paper,
-    Badge,
     IconButton,
-    Box
+    Box,
+    Divider
 } from '@mui/material';
 
-import ShoppingListItem from './ShoppingListItem';
+import FaceRoundedIcon from '@mui/icons-material/FaceRounded';
+import ManageAccountsRoundedIcon from '@mui/icons-material/ManageAccountsRounded';
+import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 
-import ShoppingBagRoundedIcon from '@mui/icons-material/ShoppingBagRounded';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../redux/user/user.action';
 
-import { useSelector } from 'react-redux';
-import { selectCartItemsCount, selectCartItems } from '../redux/cart/cart.selector'
-
-const ShoppingList = (props) => {
-    const cartItems = useSelector(selectCartItems);
-    const itemCount = useSelector(selectCartItemsCount);
+const UserMenu = (props) => {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const navigate = useNavigate();
     const open = Boolean(anchorEl);
 
+    const dispatch = useDispatch();
+    const setCurrentUserHandler = user => dispatch(setCurrentUser(user));
+
+    const signOut = event => {
+        event.preventDefault();
+        setCurrentUserHandler(null);
+    }
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -34,10 +35,6 @@ const ShoppingList = (props) => {
         setAnchorEl(null);
     };
 
-    const goToCheckOutPage = (event) => {
-        handleClose();
-        navigate("/check-out");
-    }
     return (
         <>
             <Box >
@@ -51,9 +48,7 @@ const ShoppingList = (props) => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    <Badge badgeContent={itemCount} >
-                        <ShoppingBagRoundedIcon />
-                    </Badge>
+                    <FaceRoundedIcon />
                 </IconButton>
             </Box>
 
@@ -65,20 +60,17 @@ const ShoppingList = (props) => {
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
                 }}
+
                 anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 transformOrigin={{ vertical: "top", horizontal: "right" }}
 
             >
-                <Paper style={{ maxHeight: 500, overflow: 'auto' }}>
-                    {
-                        cartItems.map((item) => (
-                            <MenuItem key={item.id} ><ShoppingListItem item={item}></ShoppingListItem></MenuItem>
-                        ))
-                    }
-                </Paper>
-                <MenuItem ><Button onClick={goToCheckOutPage} variant="contained" fullWidth={true}>GO TO CHECKOUT</Button></MenuItem>
+
+                <MenuItem ><ManageAccountsRoundedIcon sx={{ marginRight: 2 }}></ManageAccountsRoundedIcon>profile</MenuItem>
+                <Divider></Divider>
+                <MenuItem onClick={signOut} ><ExitToAppRoundedIcon sx={{ marginRight: 2 }}></ExitToAppRoundedIcon>sign out</MenuItem>
             </Menu>
         </>
     )
 }
-export default React.memo(ShoppingList);
+export default React.memo(UserMenu);

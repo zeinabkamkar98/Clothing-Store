@@ -6,7 +6,7 @@ import Menu from '../components/Menu';
 const HomePage = () => {
     return (
         <>
-            <Container>
+            <Container disableGutters>
                 <Menu></Menu>
             </Container>
         </>

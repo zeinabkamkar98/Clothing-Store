@@ -3,22 +3,17 @@ import React from 'react';
 import { AppBar, Box, Toolbar, Typography, Container } from '@mui/material';
 
 import ShoppingList from './ShoppingList';
+import LinkTabs from './LinkTabs';
+import TabsDrawer from './TabsDrawer';
 
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../redux/user/user.selector';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentUser } from '../redux/user/user.action';
-import { selectCurrentUser } from '../redux/user/user.selector'
+
+import UserMenu from './UserMenu';
 
 const Header = (props) => {
-    const dispatch = useDispatch();
-    const setCurrentUserHandler = user => dispatch(setCurrentUser(user));
     const currentUser = useSelector(selectCurrentUser);
-
-    const signOut = event => {
-        event.preventDefault();
-        setCurrentUserHandler(null);
-    }
 
     return (
         <Box position='sticky'
@@ -29,27 +24,30 @@ const Header = (props) => {
                 zIndex: 100,
             }}>
             <AppBar position='static' >
-                <Container>
-                    <Toolbar disableGutters>
+                <Container disableGutters>
+                    <Toolbar disableGutters >
+                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}> <TabsDrawer ></TabsDrawer></Box>
+
                         <Typography
-                            variant="h6"
+                            variant="h4"
                             noWrap
-                            component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' } }}
+                            color="secondary"
+                            sx={{ paddingRight: 2, }}
                         >
-                            LOGO
+                            UNIQE
                         </Typography>
+                        <Box sx={{ display: { xs: 'none', md: 'flex' } }} type="horizontal"><LinkTabs></LinkTabs></Box>
                         <Box sx={{ flexGrow: 1 }} />
-                        <Box>
-                            <Link to="/" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>HOME</Link >
-                            <Link to="/shop" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SHOP</Link >
-                            <Link to="/contact" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>CONTACT</Link >
-                            {currentUser
-                                ? <Link to='/' onClick={signOut} style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN OUT</Link >
-                                : <Link to="/sign-in" style={{ textDecoration: 'none', color: 'white', padding: 10 }}>SIGN IN</Link >
-                            }
-                        </Box>
-                        <ShoppingList></ShoppingList>
+
+                        <Box sx={{ flexGrow: 1 }} />
+                        {currentUser
+                            ? <ShoppingList></ShoppingList>
+                            : null
+                        }
+                        {currentUser
+                            ? <UserMenu ></UserMenu>
+                            : null
+                        }
                     </Toolbar>
                 </Container>
             </AppBar>
