@@ -1,12 +1,13 @@
 import React from 'react';
 
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import ClearIcon from '@mui/icons-material/Clear';
 import { TableCell, TableRow } from '@mui/material';
 
 import { useDispatch } from 'react-redux';
 import { addItem, deleteItem, completeDeleteItem } from '../redux/cart/cart.action';
+
 
 const CheckOutItem = (props) => {
 
@@ -26,12 +27,12 @@ const CheckOutItem = (props) => {
             </TableCell>
             <TableCell >{props.item.name}</TableCell>
             <TableCell >
-                <ArrowBackIosIcon sx={{ fontSize: 16 }} onClick={() => deleteItemHandler(props.item)} />
-                <span style={{ fontSize: 18, margin: 5 }}>{props.item.quantity}</span>
-                <ArrowForwardIosIcon sx={{ fontSize: 16 }} onClick={() => addItemHandler(props.item)} />
+                <RemoveRoundedIcon fontSize='small' onClick={() => deleteItemHandler(props.item)} color='secondary' />
+                <span style={{ fontSize: 20, margin: 15 }}>{props.item.quantity}</span>
+                <AddRoundedIcon fontSize='small' onClick={() => addItemHandler(props.item)} color='secondary' />
             </TableCell>
             <TableCell >$ {props.item.price}</TableCell>
-            <TableCell ><ClearIcon onClick={() => completeDeleteItemHandler(props.item)}></ClearIcon></TableCell>
+            <TableCell ><ClearIcon onClick={() => completeDeleteItemHandler(props.item)} color='secondary'></ClearIcon></TableCell>
         </TableRow>
     )
 }
