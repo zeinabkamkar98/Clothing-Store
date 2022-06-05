@@ -46,9 +46,8 @@ function useRouteMatch(patterns) {
 
 export default function LinkTabs(props) {
 
-    const routeMatch = useRouteMatch(["/", "/shop", "/sign-in"]);
-    const currentTab = routeMatch?.pattern?.path;
-
+    const routeMatch = useRouteMatch(['/', '/shop', '/sign-in', '/shop-detail/:collectionId']);
+    const currentTab = routeMatch?.pattern?.path === '/shop-detail/:collectionId' ? '/shop' : routeMatch?.pattern?.path;
     const currentUser = useSelector(selectCurrentUser);
 
     return (
@@ -63,6 +62,7 @@ export default function LinkTabs(props) {
                 ? null
                 : <Tab to="/sign-in" label="SIGN IN" value="/sign-in" ></Tab >
             }
+
         </Tabs>
     );
 }

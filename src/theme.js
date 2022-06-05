@@ -35,7 +35,6 @@ theme = createTheme(theme, {
       defaultProps: {
         component: Link,
         color: "inherit",
-        disableFocusRipple: "true",
       },
       styleOverrides: {
         root: {

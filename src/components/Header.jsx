@@ -38,8 +38,6 @@ const Header = (props) => {
                         </Typography>
                         <Box sx={{ display: { xs: 'none', md: 'flex' } }} type="horizontal"><LinkTabs></LinkTabs></Box>
                         <Box sx={{ flexGrow: 1 }} />
-
-                        <Box sx={{ flexGrow: 1 }} />
                         {currentUser
                             ? <ShoppingList></ShoppingList>
                             : null
