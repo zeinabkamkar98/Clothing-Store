@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
     Typography,
@@ -11,22 +11,58 @@ import {
 import { useDispatch } from 'react-redux';
 import { setCurrentUser } from '../redux/user/user.action';
 
-const SignIn = (props) => {
+const SignIn = () => {
+
     const dispatch = useDispatch();
     const setCurrentUserHandler = user => dispatch(setCurrentUser(user));
 
+    const [userData, setUserData] = useState(
+        {
+            email: {
+                value: '',
+                error: false,
+                errorText: ""
+            },
+            password: {
+                value: '',
+                error: false,
+                errorText: ""
+            }
+        }
+    )
 
-    const [userData, setUserData] = useState({ email: '', password: '' })
+    useEffect(() => {
+        if (userData.email.value.length === 0) {
+            userData.email.error = true;
+            userData.email.errorText = "required";
+        }
+        else {
+            userData.email.error = false;
+            userData.email.errorText = "";
+        }
+    }, [userData.email]);
+
+    useEffect(() => {
+        if (userData.password.value.length === 0) {
+            userData.password.error = true;
+            userData.password.errorText = "required"
+        }
+        else {
+            userData.password.error = false;
+            userData.password.errorText = "";
+        }
+    }, [userData.password]);
 
     const handleSubmit = event => {
         event.preventDefault();
-        setCurrentUserHandler(userData);
-        setUserData({ email: '', password: '' });
+        if (!userData.email.error && !userData.password.error) {
+            setCurrentUserHandler(userData);
+        }
     }
 
     const handleChange = event => {
         const { value, name } = event.target;
-        setUserData({ ...userData, [name]: value });
+        setUserData({ ...userData, [name]: { ...userData[name], value } });
     }
 
     return (
@@ -42,8 +78,10 @@ const SignIn = (props) => {
                     name='email'
                     type='email'
                     onChange={handleChange}
-                    value={userData.email}
+                    value={userData.email.value}
                     label='email'
+                    error={userData.email.error}
+                    helperText={userData.email.errorText}
                     required
                     variant="standard"
                 />
@@ -52,7 +90,9 @@ const SignIn = (props) => {
                 <TextField
                     name='password'
                     type='password'
-                    value={userData.password}
+                    value={userData.password.value}
+                    error={userData.password.error}
+                    helperText={userData.password.errorText}
                     onChange={handleChange}
                     label='password'
                     required
@@ -68,6 +108,5 @@ const SignIn = (props) => {
     )
 
 }
-
 
 export default React.memo(SignIn);
