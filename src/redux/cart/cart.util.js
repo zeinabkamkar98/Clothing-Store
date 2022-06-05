@@ -9,7 +9,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
         : cartItem
     );
   } else {
-    return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+    return [{ ...cartItemToAdd, quantity: 1 }, ...cartItems];
   }
 };
 

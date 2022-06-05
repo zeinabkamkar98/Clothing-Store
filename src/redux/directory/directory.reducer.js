@@ -22,14 +22,14 @@ const INITIAL_STATE = {
       size: "100%",
     },
     {
-      title: "womens",
+      title: "women",
       imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
       id: 4,
       linkUrl: "womens",
       size: "48%",
     },
     {
-      title: "mens",
+      title: "men",
       imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
       id: 5,
       linkUrl: "mens",
