@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Grid, Typography, Divider } from '@mui/material';
 
 export class ErrorBoundray extends Component {
     constructor() {
@@ -17,7 +18,21 @@ export class ErrorBoundray extends Component {
     render() {
         if (this.state.hasErrored) {
             return (
-                <div>this page is broken</div>
+                <>
+                    <Grid
+                        container
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="center"
+                        sx={{ marginTop: 20 }}
+                    >
+                        <Typography variant='h5' align='center' color="secondary" >
+                            This page is broken :(
+                            <Divider></Divider>
+                            please check your internet connection and then try again :)
+                        </Typography>
+                    </Grid>
+                </>
             )
         }
         return this.props.children;
