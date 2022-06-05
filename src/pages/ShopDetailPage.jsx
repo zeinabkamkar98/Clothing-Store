@@ -11,8 +11,8 @@ const ShopDetailPage = (props) => {
     const { collectionId } = useParams();
     const data = collections.filter((item) => item.id === parseInt(collectionId))[0];
     return (
-        <Container>
-            <Typography sx={{ fontSize: 25, fontWeight: 'light', fontStyle: 'oblique' }} align='center'>
+        <Container sx={{ marginTop: 4, }}>
+            <Typography align='center' variant='h5' color="secondary">
                 {data.title}
             </Typography>
             <Divider></Divider>

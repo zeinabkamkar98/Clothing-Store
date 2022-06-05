@@ -11,7 +11,7 @@ const ShopPage = () => {
         <>
             <Container disableGutters >
                 {collections.map((item) => (
-                    <CollectionPreview key={item.id} collection={item.items} title={item.title}></CollectionPreview>
+                    <CollectionPreview key={item.id} collection={item.items} title={item.title} id={item.id}></CollectionPreview>
                 ))}
 
             </Container>
