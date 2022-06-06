@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksimple_store=self.webpackChunksimple_store||[]).push([[241],{3241:function(e,n,t){t.r(n),t.d(n,{ContactPage:function(){return a}});var r=t(5671),u=t(3144),i=t(136),s=t(8347),o=t(2791),c=t(3329),a=function(e){(0,i.Z)(t,e);var n=(0,s.Z)(t);function t(){return(0,r.Z)(this,t),n.apply(this,arguments)}return(0,u.Z)(t,[{key:"render",value:function(){return(0,c.jsx)("div",{children:"CONTACT"})}}]),t}(o.Component);n.default=o.memo(a)}}]);
+//# sourceMappingURL=241.be324698.chunk.js.map
